@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boilerplate Code</title>
+    <style>
+        .card{
+            width: 60%;
+            height: 100%;
+            padding: 50px;
+            border: 2px solid red;
+        }
+
+        .input1{
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        label{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-weight: 600;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Code goes here
+
+    function Temp(){
+        const [celsius, setCelsius] = React.useState("")
+        const [fahrenheit, setFahrenheit] = React.useState("")
+
+        function handleCelsiusChange(event){
+            const celsiusValue=event.target.value
+            const fahrenheitValue=(celsiusValue*1.8)+32
+            setCelsius(celsiusValue)
+            setFahrenheit(fahrenheitValue.toFixed(2))
+        }
+
+        const handleFahrenheitChange = (event) => {
+            const fahrenheitValue = event.target.value;
+            const celsiusValue = ((fahrenheitValue - 32) * 5) / 9;
+            setFahrenheit(fahrenheitValue);
+            setCelsius(celsiusValue.toFixed(2));
+        };
+
+        function handleReset(){
+           setCelsius("")
+           setFahrenheit("")
+        }
+
+        return(
+            <div className="card">
+                <label>
+                    Celsius:
+                    <input
+                        className="input1"
+                        type="number"
+                        value={celsius}
+                        onChange={handleCelsiusChange}/>
+                </label>
+                <br/>
+                <label>
+                    Fahrenheit:
+                    <input
+                        type="number"
+                        value={fahrenheit}
+                        onChange={handleFahrenheitChange}/>
+                </label>
+                <br/>
+                <br/>
+                <button onClick={handleReset} style={{padding:"3px 10px"}}>Reset</button>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).
+    render(<Temp/>)
+  </script>
+</html>
